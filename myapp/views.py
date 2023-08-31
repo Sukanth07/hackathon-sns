@@ -31,5 +31,5 @@ def student(request, username):
         'stud_reg':user.username,
         'stud_batch':f"({(int(user.graduation)-4)} - {int(user.graduation)})"
     }
-    print(mydict)
+    #print(mydict)
     return render(request, "student.html", mydict)
