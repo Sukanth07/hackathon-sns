@@ -117,5 +117,13 @@ def event_form_sri(request):
 
     return render(request, 'student.html', {'form': form})
 
-def view_activities(request):
-    return render(request, "view_activities.html")
+def view_activities(request, username):
+    # Now you can use the 'username' argument in your view
+    try:
+        user = Users.objects.get(username=username)
+    except Users.DoesNotExist:
+        # Handle the case where the user does not exist, e.g., return a 404 page
+        return render(request, '404.html')
+    
+    # Your view logic here, e.g., passing 'user' to the template context
+    return render(request, 'view_activities.html', {'user': user})

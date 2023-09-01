@@ -11,5 +11,5 @@ urlpatterns = [
     path('event_form_cfc/',views.event_form_cfc, name='event_form_cfc'),
     path('event_form_iipc/',views.event_form_iipc, name='event_form_iipc'),
     path('event_form_sri/',views.event_form_sri, name='event_form_sri'),
-    path('view_activities/',views.view_activities, name='view_activities'),
+    path('view_activities/<str:username>/',views.view_activities, name='view_activities'),
 ]
