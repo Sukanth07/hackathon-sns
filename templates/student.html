@@ -5,213 +5,191 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Student Dashboard</title>
 
-<!------- Style-------->
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f5f5f5;
-        margin: 0;
-        padding: 0;
-      }
-      
-      header {
-        background-color: #333;
-        color: white;
-        text-align: center;
-        padding: 1rem 0;
-      }
-      
-      .student-details {
-        margin: 2rem auto;
-        padding: 1.5rem;
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      }
-      
-      .student {
-        margin-bottom: 1.5rem;
-      }
-      
-      .open-club-list {
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 0.7rem 1.2rem;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-      }
-      
-      .open-club-list:hover {
-        background-color: #0056b3;
-      }
-      
-      .club-list {
-        display: none;
-        margin: 2rem auto;
-        padding: 1.5rem;
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      }
-      
-      .clubs {
-        list-style: none;
-        padding: 0;
-      }
-      
-      .club-item {
-        margin-bottom: 0.5rem;
-        cursor: pointer;
-        padding: 0.5rem;
-        border-radius: 5px;
-        transition: background-color 0.3s ease;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem;
-        background-color: #f9f9f9;
-        border: 1px solid #ddd;
-        transition: background-color 0.3s ease, transform 0.3s ease;
-      }
-      
-      .club-item:hover {
-        
-        background-color: #f5f5f5;
-        transform: translateY(-3px);
-      }
-      .club-name {
-        font-weight: bold;
-      }
-      
-      .event-icon {
-        color: #007bff;
-        font-size: 1.2rem;
-        cursor: pointer;
-        transition: color 0.3s ease;
-      }
-      .event-icon:hover {
-        color: #0056b3;
-      }
-      
-      .event-form {
-        display: none;
-        margin: 2rem auto;
-        padding: 1.5rem;
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        border: 1px solid #ddd;
-        padding: 2rem;
-      }
-      
-      label, input {
-        display: block;
-        margin-bottom: 1rem;
-        width: 100%;
-        padding: 0.7rem;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        transition: border-color 0.3s ease;
-      }
-      input:focus {
-        border-color: #007bff;
-      }
-      
-      button {
-        background-color: #28a745;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 0.7rem 1.2rem;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        box-shadow: 8px 8px 8px#0056b3;
-      }
-      
-      button:hover {
-        background-color: #218838;
-      }
-</style>
-<!--------------------->
-
-<!------ -Script-------->
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const openClubListButton = document.querySelector(".open-club-list");
-        const clubList = document.querySelector(".club-list");
-        const clubs = document.querySelectorAll(".club-item");
-        const eventForm = document.querySelector(".event-form");
-        const eventNameInput = document.getElementById("eventName");
-        const collegeNameInput = document.getElementById("college");
-        const eventDateInput = document.getElementById("eventDate");
-        const selectedClubInput = document.getElementById("selectedClub");
-        
-        
-        openClubListButton.addEventListener("click", function () {
-          clubList.style.display = "block";
-          eventForm.style.display = "none";
-        });
-      
-        clubs.forEach(function (club) {
-          club.addEventListener("click", function () {
-            const selectedClub = club.getAttribute("data-club");
-            selectedClubInput.value = selectedClub;
-            eventForm.style.display = "block";
-            eventNameInput.value = ""; // Clear previous input
-            collegeNameInput.value = ""; // Clear previous input
-            eventDateInput.value = ""; // Clear previous input
-          });
-        });
-      });    
-</script>
-<!--------------------->
-
 </head>
 <body>
   <header>
     <h1>Student Dashboard</h1>
+    <div class="view_activities">
+      <a href="{% url 'view_activities' %}"><button type="button">View Activities</button></a>
+    </div>
+    <div class="logout">
+      <a href="{% url 'home' %}"><Button type="submit">Logout</Button></a>
+    </div>
   </header>
   
   <section class="student-details">
     <h2>Student Details</h2>
+    
     <div class="student">
       <p><strong>Name:</strong> {{stud_fullname}}</p>
       <p><strong>Department:</strong> {{stud_dept}}</p>
       <p><strong>Register No.:</strong> {{stud_reg}}</p>
       <p><strong>Batch:</strong> {{stud_batch}}</p>
-      <button class="open-club-list">Add Participation</button>
     </div>
+
   </section>
   
-  <div class="club-list">
-    <h2>Select the Pillar</h2>
-    <ul class="clubs">
-      <li class="club-item" data-club="Programming Club">Center for Learning and Teaching (CLT)</li>
-      <li class="club-item" data-club="Art Club">Skill and Career Development (SCD)</li>
-      <li class="club-item" data-club="Sports Club">Center for Creativity (CFC)</li>
-      <li class="club-item" data-club="Music Club">Industry Institute Partnership Cell (IIPC)</li>
-      <li class="club-item" data-club="Science Club">Social Responsibility Initiatives (SRI)</li>
-    </ul>
-  </div>
-  
-  <div class="event-form">
-    <h2>Add Event</h2>
-    <form id="eventForm">
-      <input type="hidden" id="selectedClub" name="selectedClub">
+  <section class="pillars" id="pillarsss">
+    <h2>Select Pillar:</h2>
+    {% block content %}
+    <form action="/pillar_form/" method="POST">
+      {%csrf_token%}
+
+     
+      <select name="pillar" id="pillars">
+        <option value="clt">Center for Learning & Teaching (CLT)</option>
+        <option value="scd">Skill and Career Development (SCD)</option>
+        <option value="cfc">Center for Creativity (CFC)</option>
+        <option value="iipc">Industry Institute Partnership Cell (IIPC)</option>
+        <option value="sri">Social Responsibility Initiative (SRI)</option>
+      </select>
       
-      <label for="eventName">Event Name:</label>
-      <input type="text" id="eventName" name="eventName" required>
-      <label for="college">College Name:</label>
-      <input type="text" id="college" name="college" required>
-      
-      <label for="eventDate">Event Date:</label>
-      <input type="date" id="eventDate" name="eventDate" required>
-      
-      <button type="submit">Add Event</button>
+      <button type="submit">Next</button>
     </form>
-  </div>
+
+    
+    {% if pillar == "clt" %}
+    <h2>Add Event</h2>
+    <form action="{% url 'event_form_clt' %}" method="POST">
+      {%csrf_token%}
+
+      <label for="username">Register Number:</label>
+      <input type="text" name="username" id="username" required>
+
+      <label for="event_name">Event Name:</label>
+      <input type="text" name="event_name" id="event_name">
+
+      <label for="college_name">College Name:</label>
+      <input type="text" name="college_name" id="college_name">
+
+      <label for="date">Date:</label>
+      <input type="date" name="date" id="date">
+
+      <label for="prize_won">Prize Won</label>
+
+      <input type="radio" name="prize_won" id="prize_won" value="Yes">
+      <label for="prize_won1">Yes</label>
+
+      <input type="radio" name="prize_won" id="prize_won" value="No">
+      <label for="prize_won1">No</label>
+
+      <label for="position">Position</label>
+      <input type="radio" name="position" id="position" value="1">
+      <label for="position1">1</label>
+
+      <input type="radio" name="position" id="position" value="2">
+      <label for="position2">2</label>
+
+      <input type="radio" name="position" id="position" value="3">
+      <label for="position3">3</label>
+
+      <input type="radio" name="position" id="position" value="None">
+      <label for="position_none">None</label>
+
+      <button type="submit">Save Event</button>
+    </form>
+    {%endif%}
+
+    {% if pillar == "scd" %}
+    <h2>Add Event</h2>
+    <form action="{% url 'event_form_scd' %}" method="POST">
+      {%csrf_token%}
+
+      <label for="username">Register Number:</label>
+      <input type="text" name="username" id="username" required>
+
+      <label for="event_name">Event Name:</label>
+      <input type="text" name="event_name" id="event_name">
+
+      <label for="college_name">College Name:</label>
+      <input type="text" name="college_name" id="college_name">
+
+      <label for="date">Date:</label>
+      <input type="date" name="date" id="date">
+
+      <label for="prize_won">Prize Won</label>
+
+      <input type="radio" name="prize_won" id="prize_won" value="Yes">
+      <label for="prize_won1">Yes</label>
+
+      <input type="radio" name="prize_won" id="prize_won" value="No">
+      <label for="prize_won1">No</label>
+
+      <label for="position">Position</label>
+      <input type="radio" name="position" id="position" value="1">
+      <label for="position1">1</label>
+
+      <input type="radio" name="position" id="position" value="2">
+      <label for="position2">2</label>
+
+      <input type="radio" name="position" id="position" value="3">
+      <label for="position3">3</label>
+
+      <input type="radio" name="position" id="position" value="None">
+      <label for="position_none">None</label>
+
+      <button type="submit">Save Event</button>
+    </form>
+    {%endif%}
+
+    {% if pillar == "cfc" %}
+    <h2>Add Event</h2>
+    <form action="{% url 'event_form_cfc' %}" method="POST">
+      {%csrf_token%}
+
+      <label for="username">Register Number:</label>
+      <input type="text" name="username" id="username" required>
+
+      <label for="event_name">Event Name:</label>
+      <input type="text" name="event_name" id="event_name">
+
+      <label for="college_name">College Name:</label>
+      <input type="text" name="college_name" id="college_name">
+
+      <label for="date">Date:</label>
+      <input type="date" name="date" id="date">
+
+      <button type="submit">Save Event</button>
+    </form>
+    {%endif%}
+
+    {% if pillar == "iipc" %}
+    <h2>Add Event</h2>
+    <form action="{% url 'event_form_iipc' %}" method="POST">
+      {%csrf_token%}
+
+      <label for="username">Register Number:</label>
+      <input type="text" name="username" id="username" required>
+
+      <label for="program">Program Name:</label>
+      <input type="text" name="program" id="program">
+
+      <label for="date">Date:</label>
+      <input type="date" name="date" id="date">
+
+      <button type="submit">Save Event</button>
+    </form>
+    {%endif%}
+
+    {% if pillar == "sri" %}
+    <h2>Add Event</h2>
+    <form action="{% url 'event_form_sri' %}" method="POST">
+      {%csrf_token%}
+
+      <label for="username">Register Number:</label>
+      <input type="text" name="username" id="username" required>
+
+      <label for="program">Club Name:</label>
+      <input type="text" name="club" id="club">
+
+
+      <button type="submit">Save Event</button>
+    </form>
+    {%endif%}
+
+    {% endblock %}
+  </section>
+  
   
 </body>
 </html>
