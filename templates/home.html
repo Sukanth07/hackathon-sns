@@ -1,16 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <img class="top-left-image" src="sns logo.png" alt="Image Left" >
+        <img class="top-right-image" src="SNS Institution.png" alt="Image Right">
+        <img class="top-center-image" src="5_Pillars.jpg" alt="Image Center" border-radius:20px>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hackathon</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            position: relative;
+            width: 50%;
+            padding: 20px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .top-center-image {
+            position: absolute;
+            width: 250px; /* Adjust the width as needed */
+            top: 10px;
+            left: 50%;
+            border-radius:30px;
+            transform: translateX(-50%);
+        }
+
+        .top-left-image,
+        .top-right-image {
+            position: absolute;
+            width: 100px;
+            top: 10px;
+        }
+
+        .top-left-image {
+            left: 10px;
+        }
+
+        .top-right-image {
+            right: 10px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            background-color: #007BFF;
+            color: #fff;
+            font-weight: bold;
+            width:100;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #0056b3;
+            border-radius:30px;
+        }
+
+        button {
+            cursor: pointer;
+            border-radius:30px;
+        }
+    </style>
 </head>
 <body>
-    <h1>5 - Pillar Student Management System</h1>
-    <br>
-    <br>
-    <a href="{% url 'login' %}"><button>Login as Student</button></a>
-    <a href="{% url 'login' %}"><button>Login as Faculty</button></a>
+    <div class="container">
+        
+        <h1>5 - Pillar Student Management System</h1>
+        <br>
+        <br>
+        <a href="{% url 'login' %}">Login as Student</a>
+        <a href="{% url 'login' %}">Login as Faculty</a>
+    </div>
 </body>
 </html>
-#fuck
